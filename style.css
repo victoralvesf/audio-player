@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400, 500, 700');
+
+#volume-mute, #volume-medium, #volume-off, #volume {
+  display: none;
+}
+
+body,
+span {
+  font-family: "Roboto", sans-serif;
+  /*background: #7fe5a3;*/
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+audio {
+  position: absolute;
+}
+
+h2 {
+  font-size: 26px;
+  margin: 14px 0;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+p {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 10px;
+  color: grey;
+}
+
+.fa-play-circle,
+.fa-pause-circle {
+  width: 26px !important;
+  height: 26px !important;
+}
+
+a {
+  text-decoration: none;
+  color: #9d57e4;
+}
+
+.ctr-btn,
+.dropbtn,
+.dropdown-content span {
+  outline: none;
+}
+
+.ctr-btn {
+  cursor: pointer;
+}
+
+.ctr-btn svg {
+  color: #666;
+}
+
+.ctr-btn svg:hover,
+.ctr-btn:hover {
+  color: #000;
+}
+
+.player-footer {
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  height: 60px;
+  bottom: 0;
+  margin-top: 300px;
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+}
+
+.cover {
+  width: 5%;
+  padding: 5px;
+  min-width: 66px;
+}
+
+.cover img {
+  width: 50px;
+  height: auto;
+  border-radius: 3px;
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+}
+
+.text-time h3,
+.text-time p,
+.cover img,
+.dropbtn,
+.dropdown-content span {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.audio-player {
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.2s;
+  width: 70%;
+  background: white;
+  box-sizing: border-box;
+  height: 60px;
+  margin: 0 auto;
+  z-index: 20;
+  position: relative;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 100%;
+}
+
+.controls1 {
+  width: 15%;
+  min-width: 180px;
+}
+
+.controls {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background: white;
+  margin-top: -1px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.controls_plays {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100%;
+}
+
+.controls_player {
+  flex: 1;
+  fill: #7fe5a3;
+  display: flex;
+  justify-content: space-around;
+}
+
+.text-time {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 55%;
+}
+
+.progress {
+  height: 45%;
+}
+
+.text-time .title {
+  font-size: 16px;
+  max-width: 60%;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.text-time #current-time, .text-time #timeleft {
+  text-align: right;
+  font-size: 14px;
+  font-weight: 400;
+  color: #888;
+}
+
+#pause_btn {
+  display: none;
+}
+
+#next_btn {
+  margin-right: 2px;
+}
+
+#volume_btn {
+  cursor: pointer;
+  height: 100%;
+  width: 23px;
+  max-width: 20px;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  font-size: 18px;
+}
+
+.progressbar_slide {
+  width: 100%;
+  background: #ccc;
+  height: 5px;
+  top: 5px;
+  border-radius: 5px;
+  z-index: 8;
+  position: relative;
+  cursor: pointer;
+}
+.progressbar_range {
+  width: 0;
+  background: #008aff;
+  height: 5px;
+  border-radius: 5px;
+  z-index: 9;
+}
+
+.progressbar_slide:hover .progressbar_range {
+  border-radius: 5px 0px 0px 5px;
+}
+
+.progressbar_dot {
+  pointer-events: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  opacity: 1;
+  margin-left: 0%;
+  background: #008aff;
+  border: 2px solid #fff;
+  -webkit-box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
+  -moz-box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
+  box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
+  position: absolute;
+  z-index: 10;
+  left: -1%;
+  top: -3.7px;
+}
+
+/*Dropdown Velocidade*/
+.dropbtn {
+  background-color: transparent;
+  width: min-content;
+  height: 100%;
+  color: #666;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  font-family: "Roboto", sans-serif;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  margin-left: -8px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 45px;
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  z-index: 1;
+  top: -230px;
+  left: 2px;
+  transition: .3s ease;
+}
+
+/* Links inside the dropdown */
+.dropdown-content span {
+  color: black;
+  background: #fff;
+  padding: 9px 5px;
+  font-size: 12px;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content span:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  color: #000;
+}
+
+.volume-slide {
+  display: none;
+  background-color: #fff;
+  position: absolute;
+  width: 120px;
+  height: 20px;
+  padding: 4px 14px 12px 10px;
+  z-index: 1;
+  transform: rotate(-90deg);
+  top: -90px;
+  left: 115px;
+  -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  cursor: default;
+}
+
+.volumeHover:hover .volume-slide {
+  display: block;
+}
+
+.slider:hover .volumeHover .ctr-btn {
+  color: #000;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  background: #000;
+  cursor: grab;
+}
+
+.slider::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  -webkit-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  -moz-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
+  background: #000;
+  cursor: grab;
+}
