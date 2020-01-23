@@ -11,6 +11,7 @@
 <body>
 
   <audio id="audio">
+    <!-- <source src="https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_5MG.mp3"> -->
     <source src="https://nerdcast.jovemnerd.com.br/nerdcast_678_piores_crossovers.mp3">
   </audio>
 
@@ -20,7 +21,7 @@
         <div class="cover">
           <img src="https://cdn-images-1.listennotes.com/podcasts/nerdcast-jovem-nerd-PwFrGO5CtMb.300x300.jpg">
         </div>
-        <div class="controls1">
+        <div class="main_controls">
           <div class="controls_plays">
             <div id="prev_btn" class="ctr-btn">
               <i class="fas fa-undo"></i>
@@ -84,11 +85,9 @@
             <span id="timeleft">00:00:00</span>
           </div>
           <div class="progress">
-            <div class="progressbar_slide">
-              <div class="progressbar_range">
-                <div class="progressbar_dot"></div>
-              </div>
-            </div>
+            <div class="slider_bar"></div>
+            <div class="progressbar_slide"></div>
+            <input type="range" class="progress_range" name="progress" id="audioProgress" min="0" max="0">
           </div>
         </div>
       </div>

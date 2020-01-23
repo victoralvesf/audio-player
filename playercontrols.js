@@ -7,29 +7,19 @@ $(document).ready(function () {
   // objeto para controlar o audio
   const audio = document.getElementById('audio');
 
-  // adiciona o tempo do audio ao carregar pagina
-  $('#timeleft').text('-' + timeSecond(audio.duration));
-
-  //Funcoes para passar a posicao do mouse na barra
-  $('.info .progressbar_slide').mousedown(function (e) {
-    e.preventDefault();
+  // Funcoes para passar a posicao do mouse na barra
+  $('#audioProgress').mousedown(function () {
     mouseDown = true;
   });
 
-  $('.info .progressbar_slide').mouseup(function (e) {
-    timeFromOffset(e, this);
+  $('#audioProgress').mouseup(function () {
+    const desiredTime = $(this).val();
+    audio.currentTime = desiredTime;
   });
 
   $(document).mouseup(function () {
     mouseDown = false;
   });
-
-  //funcao para definir o currentTime de acordo com a barra
-  function timeFromOffset(mouse, progressBar) {
-    const percentage = mouse.offsetX / $(progressBar).width() * 100;
-    const seconds = audio.duration * (percentage / 100);
-    audio.currentTime = seconds;
-  }
 
   // Botao play e pause
   $("#plays_btn").click(function (e) {
@@ -43,6 +33,8 @@ $(document).ready(function () {
       audio.play();
       $("#play_btn").hide();
       $("#pause_btn").show();
+      $('#audioProgress').attr('max', audio.duration);
+      $('#timeleft').text('-' + timeSecond(audio.duration));
     }
   });
 
@@ -66,12 +58,14 @@ $(document).ready(function () {
       $('#volume-mute').hide();
       $('#volume-up').show();
       $('#volRange').val(100);
+      $('#volRange').css("background", "linear-gradient(to right, rgb(0, 138, 255) 0%, rgb(0, 138, 255) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 100%)");
       audio.volume = 1;
     } else {
       $('#volume_btn').attr('data-volume', '0');
       $('#volume-mute').show();
       $('#volume-up').hide();
       $('#volRange').val(0);
+      $('#volRange').css("background", "linear-gradient(to right, rgb(0, 138, 255) 0%, rgb(0, 138, 255) 0%, rgb(238, 238, 238) 0%, rgb(238, 238, 238) 100%)");
       audio.volume = 0;
     }
 
@@ -88,7 +82,10 @@ $(document).ready(function () {
   // Range de volume
   $('#volRange').on('input change', function () {
     const volumeRange = $(this).val() / 100;
+    const i = volumeRange * 100;
     $(this).attr('data-tippy-content', Math.round(volumeRange * 100) + '%');
+    $(this).css("background", "linear-gradient(to right, rgb(0, 138, 255) 0%, rgb(0, 138, 255) " + i + "%, rgb(238, 238, 238) " + i + "%, rgb(238, 238, 238) 100%)");
+    
 
     audio.volume = volumeRange;
 
@@ -112,13 +109,19 @@ $(document).ready(function () {
 
   // Preencher barra de progresso
   audio.addEventListener("timeupdate", function timeUpdate() {
-    const currentTime = audio.currentTime;
-    const duration = audio.duration;
-
-    $('.progressbar_range').stop(true, true).animate({ 'width': -0.10 + (currentTime + .25) / duration * 100 + '%' }, 250, 'linear');
-    $('.progressbar_range .progressbar_dot').stop(true, true).animate({ 'left': -1.5 + (currentTime + .25) / duration * 100 + '%' }, 250, 'linear');
+    if(!mouseDown){
+      const max = $('#audioProgress').attr('max');
+      const i = ($('#audioProgress').val() / max * 100) + 0.4;
+      $('#audioProgress').prop('value', audio.currentTime);
+      $('.slider_bar').css("width", i + "%").css("will-change", "width");
+    }
   });
 
+  $('#audioProgress').on('input change', function(){
+    const max = $(this).attr('max');
+    const i = $(this).val() / max * 100;
+    $('.slider_bar').css("width", i + "%").css("will-change", "width");
+  })
 
   // Funcao para mostrar o tempo restante
   audio.addEventListener("timeupdate", function () {
@@ -154,7 +157,7 @@ $(document).ready(function () {
   audio.addEventListener("ended", function () {
     $("#play_btn").show();
     $("#pause_btn").hide();
-    $('.progressbar_range').stop(true, true).animate({ 'width': 0 + '%' }, 250, 'linear');
+    $('.slider_bar').css("width", "0%");
     audio.currentTime = 0;
   }, false);
 

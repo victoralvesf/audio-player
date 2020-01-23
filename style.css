@@ -7,14 +7,15 @@
 body,
 span {
   font-family: "Roboto", sans-serif;
-  /*background: #7fe5a3;*/
+  background: #121216;
   overflow: hidden;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 audio {
-  position: absolute;
+  display: none;
 }
 
 h2 {
@@ -58,39 +59,43 @@ a {
 }
 
 .ctr-btn svg {
-  color: #666;
+  color: #eee;
 }
 
 .ctr-btn svg:hover,
 .ctr-btn:hover {
-  color: #000;
+  color: #fff;
 }
 
 .player-footer {
   width: 100%;
-  background-color: white;
+  background: #23232d;
+  border-top: 1px solid #32323d;
   position: fixed;
   height: 60px;
   bottom: 0;
-  margin-top: 300px;
   -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
 }
 
+.content {
+  width: 100%;
+  background: #23232d;
+  display: flex;
+  justify-content: space-between;
+}
+
 .cover {
-  width: 5%;
+  height: 100%;
   padding: 5px;
-  min-width: 66px;
+  margin-right: 10px;
 }
 
 .cover img {
   width: 50px;
   height: auto;
-  border-radius: 3px;
-  -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
-  -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
-  box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
+  border-radius: 2px;
 }
 
 .text-time h3,
@@ -104,12 +109,6 @@ a {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-.content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
 }
 
 .audio-player {
@@ -132,9 +131,10 @@ a {
   height: 100%;
 }
 
-.controls1 {
+.main_controls {
   width: 15%;
   min-width: 180px;
+  margin-right: 10px;
 }
 
 .controls {
@@ -167,16 +167,17 @@ a {
   justify-content: space-between;
   align-items: flex-end;
   height: 55%;
+  color: #eee;
 }
 
 .progress {
   height: 45%;
+  position: relative;
 }
 
 .text-time .title {
-  font-size: 16px;
+  font-size: 14px;
   max-width: 60%;
-  color: #666;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -184,9 +185,8 @@ a {
 
 .text-time #current-time, .text-time #timeleft {
   text-align: right;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
-  color: #888;
 }
 
 #pause_btn {
@@ -212,41 +212,49 @@ a {
 .progressbar_slide {
   width: 100%;
   background: #ccc;
-  height: 5px;
+  height: 4px;
   top: 5px;
-  border-radius: 5px;
-  z-index: 8;
+  border-radius: 3px;
+  z-index: 6;
   position: relative;
   cursor: pointer;
 }
-.progressbar_range {
-  width: 0;
-  background: #008aff;
-  height: 5px;
-  border-radius: 5px;
-  z-index: 9;
-}
 
-.progressbar_slide:hover .progressbar_range {
-  border-radius: 5px 0px 0px 5px;
-}
-
-.progressbar_dot {
-  pointer-events: none;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  opacity: 1;
-  margin-left: 0%;
+.slider_bar {
+  width: 0%;
   background: #008aff;
-  border: 2px solid #fff;
-  -webkit-box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
-  -moz-box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
-  box-shadow: 0px 0px 4px 2px rgba(92, 87, 92, 0.2);
+  height: 4px;
+  border-radius: 3px;
   position: absolute;
-  z-index: 10;
-  left: -1%;
-  top: -3.7px;
+  top: 5px;
+  z-index: 7;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.progress_range {
+  -webkit-appearance: none;
+  background: rgba(0,0,0,0);
+  cursor: pointer;
+  height: 12px;
+  left: -5px;
+  margin-top: -13px;
+  padding: 0;
+  position: absolute;
+  z-index: 20;
+  top: 50%;
+  width: calc(100% + 12px);
+  outline: none;
+}
+
+.progress_range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #cdcdcd;
+  box-shadow: 0px 0px 3px #0002;
 }
 
 /*Dropdown Velocidade*/
@@ -254,11 +262,16 @@ a {
   background-color: transparent;
   width: min-content;
   height: 100%;
-  color: #666;
-  font-size: 18px;
+  color: #eee;
+  font-size: 17px;
   border: none;
   cursor: pointer;
   font-family: "Roboto", sans-serif;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  color: #fff;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -274,33 +287,33 @@ a {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #fff;
+  background-color: #23232d;
   min-width: 45px;
   -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   z-index: 1;
-  top: -230px;
+  top: -231px;
   left: 2px;
   transition: .3s ease;
 }
 
 /* Links inside the dropdown */
 .dropdown-content span {
-  color: black;
-  background: #fff;
+  color: #eee;
+  background: #23232d;
   padding: 9px 5px;
   font-size: 12px;
   text-decoration: none;
   display: block;
   text-align: center;
   cursor: pointer;
-  border-bottom: 1px solid #f1f1f1;
+  border-top: 1px solid #32323d;
 }
 
 /* Change color of dropdown links on hover */
 .dropdown-content span:hover {
-  background-color: #f1f1f1;
+  background-color: #32323f;
 }
 
 /* Show the dropdown menu on hover */
@@ -308,14 +321,9 @@ a {
   display: block;
 }
 
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-  color: #000;
-}
-
 .volume-slide {
   display: none;
-  background-color: #fff;
+  background: #23232d;
   position: absolute;
   width: 120px;
   height: 20px;
@@ -323,7 +331,7 @@ a {
   z-index: 1;
   transform: rotate(-90deg);
   top: -90px;
-  left: 115px;
+  left: 113px;
   -webkit-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   -moz-box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
   box-shadow: 0px 0px 15px 2px rgba(92, 87, 92, 0.3);
@@ -341,23 +349,20 @@ a {
 .slider {
   -webkit-appearance: none;
   width: 100%;
-  height: 6px;
+  height: 4px;
   border-radius: 5px;
-  background: #d3d3d3;
+  background: linear-gradient(to right, rgb(0, 138, 255) 0%, rgb(0, 138, 255) 100%, rgb(238, 238, 238) 100%, rgb(238, 238, 238) 100%);
   outline: none;
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 2px solid #fff;
-  -webkit-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
-  -moz-box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
-  box-shadow: 0px 0px 3px 0px rgba(92, 87, 92, 1);
-  background: #000;
+  background: #fff;
+  border: 1px solid #cdcdcd;
+  box-shadow: 0px 0px 3px #0002;
   cursor: grab;
 }
 
