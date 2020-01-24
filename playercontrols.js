@@ -186,7 +186,8 @@ $(document).ready(function () {
     interactive: false,
     content: 'Retroceder 15 segundos',
     animation: 'fade',
-    delay: [300, 0],
+    distance: 25,
+    delay: [500, 0],
   });
 
   //tooltip botao forward
@@ -194,7 +195,8 @@ $(document).ready(function () {
     interactive: false,
     content: 'Avançar 15 segundos',
     animation: 'fade',
-    delay: [300, 0],
+    distance: 25,
+    delay: [500, 0],
   });
 
   $('.dropdown-content span').mouseover(function () {

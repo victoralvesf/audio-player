@@ -66,6 +66,10 @@ a {
   color: #fff;
 }
 
+#prev_btn, #next_btn {
+  margin-top: -1px;
+}
+
 .player-footer {
   width: 100%;
   background: #23232d;
@@ -195,8 +199,10 @@ a {
 
 #volume_btn {
   cursor: pointer;
+  position: relative;
   height: 100%;
   width: 23px;
+  height: 60px;
   max-width: 20px;
   transition: all 0.2s;
   display: flex;
@@ -213,7 +219,6 @@ a {
   border-radius: 3px;
   z-index: 6;
   position: relative;
-  cursor: pointer;
 }
 
 .slider_bar {
@@ -224,14 +229,12 @@ a {
   position: absolute;
   top: 5px;
   z-index: 7;
-  cursor: pointer;
   pointer-events: none;
 }
 
 .progress_range {
   -webkit-appearance: none;
   background: rgba(0,0,0,0);
-  cursor: pointer;
   height: 12px;
   left: -5px;
   margin-top: -13px;
@@ -286,7 +289,7 @@ a {
   background-color: #23232d;
   min-width: 45px;
   z-index: 1;
-  top: -245px;
+  bottom: 60px;
   left: 1px;
   transition: .3s ease;
 }
@@ -323,8 +326,8 @@ a {
   padding: 4px 14px 17px 10px;
   z-index: 1;
   transform: rotate(-90deg);
-  top: -90px;
-  left: 113px;
+  bottom: 110px;
+  left: -62px;
   cursor: default;
 }
 
@@ -353,7 +356,7 @@ a {
   background: #fff;
   border: 1px solid #cdcdcd;
   box-shadow: 0px 0px 3px #0002;
-  cursor: grab;
+  /* cursor: grab; */
 }
 
 .slider::-moz-range-thumb {
